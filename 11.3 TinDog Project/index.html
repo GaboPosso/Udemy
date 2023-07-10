@@ -15,17 +15,15 @@
 
   <body>
     <!-- Title -->
-    <section id="title">
-      <div class="container-fluid gradient-background">
-        <div class="container col-xxl-8 px-4 py-5">
-          <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <section id="title" class="gradient-background">      
+        <div class="container col-xxl-8 px-4 pt-5">
+          <div class="row flex-lg-row-reverse align-items-center g-5 pt-5">
             <div class="col-10 col-sm-8 col-lg-6">
               <img
                 src="./images/iphone.png"
                 class="d-block mx-lg-auto img-fluid"
                 alt="Bootstrap Themes"
-                width="700"
-                height="500"
+                height="200"
                 loading="lazy"
               />
             </div>
@@ -37,14 +35,14 @@
               <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <button
                   type="button"
-                  class="btn btn-primary btn-lg px-4 me-md-2"
+                  class="btn btn-light btn-lg px-4 me-md-2"
                 >
                   <img src="./images/apple.svg" />
                   Download
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-secondary btn-lg px-4"
+                  class="btn btn-outline-light btn-lg px-4"
                 >
                   <img src="./images/google-play.svg" />
                   Download
@@ -53,10 +51,11 @@
             </div>
           </div>
         </div>
-      </div>
+      
     </section>
     <!-- Features -->
     <section id="features">
+      <div class="container mt-5">
       <div class="container px-4 py-5" id="hanging-icons">
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
           <div class="col d-flex align-items-start">
@@ -104,6 +103,7 @@
           </div>
         </div>
       </div>
+    </div>
     </section>
     <!-- Testimonial -->
     <section id="testimonial">
@@ -164,7 +164,7 @@
                     <li>Unlimited App Usage</li>
                     
                   </ul>
-                  <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+                  <button type="button" class="w-100 btn btn-lg btn-outline-dark">Sign up for free</button>
                 </div>
               </div>
             </div>
@@ -180,13 +180,13 @@
                     <li>Unlimited Messages</li>
                     <li>Unlimited App Usage</li>
                   </ul>
-                  <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
+                  <button type="button" class="w-100 btn btn-lg btn-dark">Get started</button>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                <div class="card-header py-3 text-bg-primary border-primary">
+              <div class="card mb-4 rounded-3 shadow-sm border-dark">
+                <div class="card-header py-3 text-bg-dark border-dark">
                   <h4 class="my-0 fw-normal">Enterprise</h4>
                 </div>
                 <div class="card-body">
@@ -196,7 +196,7 @@
                     <li>Unlimited Matches & Messages</li>
                     <li>Unlimited App Usage</li>
                   </ul>
-                  <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
+                  <button type="button" class="w-100 btn btn-lg btn-dark">Contact us</button>
                 </div>
               </div>
             </div>
@@ -209,11 +209,11 @@
     </section>
     <!-- Footer -->
     <section id="footer" class="gradient-background">
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+      <footer class="pt-4 mt-md-5 pt-md-5">
         <div class="row">
           <div class="col-12 col-md">
-            <img class="mb-2" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19">
-            <small class="d-block mb-3 text-body-secondary">© 2017–2023</small>
+            
+            <small class="d-block mb-3 text-body-secondary">© TinDog</small>
           </div>
           <div class="col-6 col-md">
             <h5>Features</h5>
