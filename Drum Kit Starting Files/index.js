@@ -2,60 +2,71 @@ const d = document;
 // d.querySelector("button").addEventListener("click", (e) => {
 //   alert("I got clicked");
 // });
+
+
 const element = d.querySelectorAll(".drum");
-// console.log(element);
-element.forEach((element) => {
-  element.addEventListener("click", function() {
-    // // var audio = new Audio("./sounds/tom-1.mp3");
-    // // audio.play();
-    // console.log(this.style.color = "white");
-    var buttonInnerHTML = this.innerHTML;
-    switch (buttonInnerHTML) {
-      case "w":
-        var tom1 = new Audio("./sounds/tom-1.mp3");
-        tom1.play();
-        
-        break;
-        
-      case "a":
-        var tom2 = new Audio("./sounds/tom-2.mp3");
-        tom2.play();
-        
-        break;
 
-      case "s":
-        var tom3 = new Audio("./sounds/tom-3.mp3");
-        tom3.play();
-        
-        break;
+for (let i = 0; i < element.length; i++) {
+  element[i].addEventListener("click", function() {
     
-      case "d":
-      var tom4 = new Audio("./sounds/tom-4.mp3");
-      tom4.play();
+  
+    makeSound(this.innerHTML);
+  });  
+}
+// console.log(element);
+
+
+addEventListener("keydown", function(e) {
+  makeSound(e.key);
+  
+})
+
+function makeSound(key) {
+  switch (key) {
+    case "w":
+      var tom1 = new Audio("./sounds/tom-1.mp3");
+      tom1.play();
+      
+      break;
+      
+    case "a":
+      var tom2 = new Audio("./sounds/tom-2.mp3");
+      tom2.play();
       
       break;
 
-      case "j":
-      var snare = new Audio("./sounds/snare.mp3");
-      snare.play();
+    case "s":
+      var tom3 = new Audio("./sounds/tom-3.mp3");
+      tom3.play();
       
-      break;
-
-      case "k":
-      var crash = new Audio("./sounds/crash.mp3");
-      crash.play();
-      
-      break;
-
-      case "l":
-      var kick = new Audio("./sounds/kick-bass.mp3");
-      kick.play(); 
-
       break;
   
-  
-      default: alert("Please choose a valid key");
-        break;
-    }
-  });
-});
+    case "d":
+    var tom4 = new Audio("./sounds/tom-4.mp3");
+    tom4.play();
+    
+    break;
+
+    case "j":
+    var snare = new Audio("./sounds/snare.mp3");
+    snare.play();
+    
+    break;
+
+    case "k":
+    var crash = new Audio("./sounds/crash.mp3");
+    crash.play();
+    
+    break;
+
+    case "l":
+    var kick = new Audio("./sounds/kick-bass.mp3");
+    kick.play(); 
+
+    break;
+
+
+    default: alert("Please choose a valid key");
+      break;
+  }
+}
