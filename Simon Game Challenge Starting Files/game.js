@@ -1,6 +1,6 @@
-let buttonColours = ["red", "blue", "green", "yellow"];
-let gamePattern = [];
-let userClickedPattern = [];
+var buttonColours = ["red", "blue", "green", "yellow"];
+var gamePattern = [];
+var userClickedPattern = [];
 
 $(".btn").click(function () {
   var userChosenColour = $(this).attr("id");
@@ -12,7 +12,7 @@ $(".btn").click(function () {
 //3. Use Google/Stackoverflow to figure out how you can use Javascript to play the sound for the button colour selected in step 1.
 
 function nextSequence() {
-  var randomNumber = Math.floor(Math.random() * (3 + 1));
+  var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
 
