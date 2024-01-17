@@ -5,8 +5,9 @@ var userClickedPattern = [];
 $(".btn").click(function () {
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
-
+  $(this).addClass("pressed");
   playSound(userChosenColour);
+  animatePress(userChosenColour);
 });
 
 //3. Use Google/Stackoverflow to figure out how you can use Javascript to play the sound for the button colour selected in step 1.
@@ -29,4 +30,8 @@ function nextSequence() {
     audio.play();
   }
 
-
+function animatePress(currentColour) {
+ setTimeout(() => {
+  $(".btn").removeClass("pressed");
+ }, 100);
+}
