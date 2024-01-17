@@ -1,6 +1,7 @@
 var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
+var level = 0;
 
 $(".btn").click(function () {
   var userChosenColour = $(this).attr("id");
@@ -10,7 +11,13 @@ $(".btn").click(function () {
   animatePress(userChosenColour);
 });
 
-//3. Use Google/Stackoverflow to figure out how you can use Javascript to play the sound for the button colour selected in step 1.
+$("body").keypress(function (e) {
+  nextSequence();
+
+  $("#level-title").html(`Level ${level}`);
+});
+
+
 
 function nextSequence() {
   var randomNumber = Math.floor(Math.random() * 4);
@@ -21,17 +28,18 @@ function nextSequence() {
     .fadeIn(100)
     .fadeOut(100)
     .fadeIn(100);
-  
+
   playSound(randomChosenColour);
-  
+
+  level++;
 }
-  function playSound(name) {
-    var audio = new Audio("sounds/" + name + ".mp3");
-    audio.play();
-  }
+function playSound(name) {
+  var audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
 
 function animatePress(currentColour) {
- setTimeout(() => {
-  $(".btn").removeClass("pressed");
- }, 100);
+  setTimeout(() => {
+    $(".btn").removeClass("pressed");
+  }, 100);
 }
