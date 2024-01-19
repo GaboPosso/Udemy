@@ -37,6 +37,7 @@ function nextSequence() {
   playSound(randomChosenColour);
 
   level++;
+  $("#level-title").html(`Level ${level}`);
 }
 
 function playSound(name) {
@@ -66,6 +67,12 @@ function checkAnswer(currentLevel) {
     setTimeout(()=> {
       $("body").removeClass("game-over")
     }, 200);
-  }
-  // else{alert("Wrong")};
+    startOver();
+  }  
 }
+
+var startOver = () => {
+  level = 0, 
+  gamePattern = [],
+  started = false;
+} 
