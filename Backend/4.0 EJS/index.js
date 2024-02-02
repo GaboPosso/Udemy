@@ -4,9 +4,19 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", {
-    dayType: "a weekday",
-    advice: "It's time to work hard",
+  const today = new Date("January 02, 2024");
+  const day = today.getDay();
+
+  let type = "a weekday";
+  let adv = "It's time to work hard";
+
+  if ( day === 0 || day === 6){
+    type = "the weekend";
+    adv = "It's time to have fun"
+  }
+    res.render("index.ejs", {
+    dayType: type,
+    advice: adv,
   });
 });
 
