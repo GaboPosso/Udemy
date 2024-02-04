@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
-  const today = new Date("January 02, 2024");
+  const today = new Date();
   const day = today.getDay();
 
   let type = "a weekday";
