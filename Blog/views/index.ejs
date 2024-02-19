@@ -1,2 +1,10 @@
-<h1>Welcome to Capstone Project
-</h1>
+
+<%- include("./partials/header.ejs")%>
+<form action="/submit" method="POST">
+  <label for="ux_post">Post:</label> <br>
+  <input type="text" id="ux_post" value="What do you want to share?..." />
+  <input type="submit" value="post" />
+</form>
+
+
+<%- include("./partials/footer.ejs") %>
