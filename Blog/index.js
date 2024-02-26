@@ -1,16 +1,15 @@
-import express from "express";
-import bodyParser from "body-parser"; //forms
-import debug from "debug"; //debugging 
-import path from "path"; // path management
-import passport from "passport" //authentication
-
-
+const express = require('express'); // express
+const debug = require('debug')('app'); // debugging
+const path = require('path'); // path management
+const bodyParser = require('body-parser'); // forms
+const passport = require('passport'); // authentication
 const app = express();
-const port = 3000;
-app.use(express.static(path.join(__dirname, '/public/')));
-
+const port = process.env.PORT || 3000; // port to run on
 const postRouter = require('./views/routes/postRoutes')(nav);
 const homeRouter = require('./src/routes/homeRoutes');
+app.use(express.static(path.join('public')));
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/post', postRouter);
