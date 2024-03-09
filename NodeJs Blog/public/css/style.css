@@ -69,6 +69,7 @@ textarea {
 }
 
 /* Hero Image */
+
 .hero-image {
   max-height: 528px;
   filter: drop-shadow(0px 44px 34px rgba(0, 0, 0, 0.25));
@@ -88,6 +89,12 @@ textarea {
     "menu menu";
 }
 
+@media only screen and (min-width: 768px) {
+  .header {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "logo menu button";
+  }
+}
 .header__logo:hover {
   text-decoration: underline;
 }
@@ -102,5 +109,22 @@ textarea {
   grid-area: button;
   display: flex;
   justify-content: end;
-  
+}
+
+.header__button button {
+  display: flex;
+  gap: 0rem;
+  align-items: center;
+  border: 0;
+  padding: 6px 12 px;
+  background: none;
+  border-radius: var(--border-radius);
+  border: 2px solid transparent;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--black);
+}
+
+.header__button button:hover {
+  border: 2px solid var(--black);
 }
