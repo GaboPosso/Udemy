@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 
+const adminLayout = "../views/layouts/admin";
 /**
  * GET /
- * Post - searchTerm
+ * Admin  - Login Page
  *
  */
 
@@ -16,7 +17,7 @@ router.get("/admin", async (req, res) => {
 
   try {
     const data = await Post.find();
-    res.render('index', { locals, data});
+    res.render('admin/index', { locals, layout: adminLayout});
   } catch (error) {
     console.log(error);
   }
