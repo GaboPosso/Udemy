@@ -8,17 +8,16 @@ const jwt = require("jsonwebtoken");
 const adminLayout = "../views/layouts/admin";
 const jwtSecret = process.env.JWT_SECRET;
 
-
 /**
- * 
+ *
  * Admin  - Check Login
  *
  */
-const authMiddleware = (req, res, next ) => {
+const authMiddleware = (req, res, next) => {
   const token = req.cookies.token;
 
-  if(!token) {
-    return req.status(401).json( { message: 'Unauthorized'});
+  if (!token) {
+    return req.status(401).json({ message: "Unauthorized" });
   }
 
   try {
@@ -26,9 +25,9 @@ const authMiddleware = (req, res, next ) => {
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    return req.status(401).json( { message: 'Unauthorized'})
+    return req.status(401).json({ message: "Unauthorized" });
   }
-}
+};
 
 /**
  * GET /
@@ -74,7 +73,7 @@ router.post("/admin", async (req, res) => {
     const token = jwt.sign({ userId: user._id }, jwtSecret);
     res.cookie("token", token, { httpOnly: true });
 
-    res.redirect('/dashboard');
+    res.redirect("/dashboard");
 
     // if(req.body.username === 'admin' && req.body.password === 'password') {
     //   res.send("You are logged in")
@@ -91,13 +90,21 @@ router.post("/admin", async (req, res) => {
 });
 
 /**
- * POST /
+ * GET /
  * Admin  - dashboard
  */
 
-router.get("/dashboard", authMiddleware,  async (req, res) => {
-  res.render('admin/dashboard');
- })
+router.get("/dashboard", authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: "Dashboard",
+      description: "Simple blog created with NodeJS, Express & MongoDB",
+    };
+
+    const data = await Post.find();
+    res.render("admin/dashboard", { locals, data });
+  } catch (error) {}
+});
 
 // router.post('/admin', async(req, res) => {
 //   try {
