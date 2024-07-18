@@ -1,0 +1,31 @@
+<main>
+  <%- include('./partials/header.ejs') %>
+
+  <h1 class="title">Welcome to Blog app</h1>
+  <div class="form-container">
+    <p class="form-text">Edit your blog</p>
+    <p class="form-text">Fill the form to create your blog post</p>
+    <form action="/home" method="post">
+      <label for="bTitle">Blog Title</label>
+      <input
+        type="text"
+        id="bTitle"
+        name="blogTitle"
+        placeholder="Your title here..."
+        required
+      /> <br><br>
+
+      <label for="bDes">Blog description</label>
+      <br><br>
+      <textarea
+        name="blogDes"
+        id="bDes"
+        placeholder="Your Blog here..."
+        rows="6"
+        required
+      ></textarea> <br><br>
+      <input type="submit" value="POST" />
+    </form>
+  </div>
+  <%- include('./partials/footer.ejs') %>
+</main>
