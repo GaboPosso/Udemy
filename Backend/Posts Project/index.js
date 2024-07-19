@@ -27,6 +27,11 @@ app.post("/home", (req, res) => {
   res.render("home.ejs", { blogList: blogList });
 });
 
+app.get("/blogDetails/:id", (req, res) => {
+  const blogId = req.params.id;
+  const blogDetails = blogList.find((blog) => blog.id === parseInt(blogId));
+  res.render(blogDetails, { blogDetails: blogDetails });
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
