@@ -9,9 +9,7 @@ const port = 3000;
 
 let blogList = [];
 
-function generateID() {
-  return Math.floor(Math.random() * 1000000);
-}
+
 app.get("/", (req, res) => {
   res.render("index.ejs");
 });
@@ -24,14 +22,43 @@ app.post("/home", (req, res) => {
     title: blogTitle,
     description: blogDescription,
   });
-  res.render("home.ejs", { blogList: blogList });
+  res.render("./views/partials/home.ejs", { blogList: blogList });
 });
+function generateID() {
+  return Math.floor(Math.random() * 1000000);
+}
+
+app.post("/edit/:id", (req, res) => {
+  const blogId = req.params.id;
+  const editBlog = blogList.findIndex((blog) => blog.id === parseInt(blogId));
+  if (editBlog === -1) {
+    res.send("<h1> Something went wrong</h1>");
+  }
+  const updateTitle = req.body.blogTitle;
+  const updatedDescription = req.body.blogDes;
+
+  const blogTitle = (blogList[editBlog].title = updatedTitle);
+  const blogDescription = (blogList[editBlog].description = updatedDescription);
+  [...blogList, { blogTitle: blogTitle, blogDescription: blogDescription }];
+
+  res.render("home.ejs", { isEdit: true, blogList: blogList });
+});
+
+app.post('/delete/:id')
 
 app.get("/blogDetails/:id", (req, res) => {
   const blogId = req.params.id;
   const blogDetails = blogList.find((blog) => blog.id === parseInt(blogId));
   res.render(blogDetails, { blogDetails: blogDetails });
 });
+
+app.post('/delete/:id', (req, res) => {
+  const blogId = req.params.id;
+  blogList = blogList.filter((blog) => blog.id !== parseInt(blogId));
+  res.send('<script>alert("Blog Deleted Succesfully"); window.location="/home";</script>');
+  res.redirect('/home');
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
