@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //Define paths to view files
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const indexPath = join(__dirname, "index.ejs");
+const indexPath = join(__dirname, "./views/index.ejs");
 const homePath = join(__dirname, "./views/partials/home.ejs");
 const blogDetailsPath = join(__dirname, "./views/partials/blogDetails.ejs");
 
@@ -41,7 +41,13 @@ app.post("/home", (req, res) => {
   res.render(homePath, { blogList: blogList });
 });
 
-//
+//Render Edit blog page
+app.get("/edit/:id", (req, res) => {
+  const blogId = req.params.id;
+  const blogDetails = blogList.find((blog) => blog.id === parseInt(blogId));
+  res.render(indexPath, { blogDetails: blogDetails });
+});
+//Update blog
 app.post("/edit/:id", (req, res) => {
   const blogId = req.params.id;
   const editBlog = blogList.findIndex((blog) => blog.id === parseInt(blogId));
@@ -55,14 +61,14 @@ app.post("/edit/:id", (req, res) => {
   const blogDescription = (blogList[editBlog].description = updatedDescription);
   [...blogList, { blogTitle: blogTitle, blogDescription: blogDescription }];
 
-  res.render("home.ejs", { isEdit: true, blogList: blogList });
+  res.render(indexPath, { isEdit: true, blogList: blogList });
 });
 
 //Render blog details page
 app.get("/blogDetails/:id", (req, res) => {
   const blogId = req.params.id;
   const blogDetails = blogList.find((blog) => blog.id === parseInt(blogId));
-  res.render(blogDetails, { blogDetails: blogDetails });
+  res.render(blogDetailsPath, { blogDetails: blogDetails });
 });
 
 // Delete blog
@@ -84,4 +90,3 @@ app.listen(port, () => {
 function generateID() {
   return Math.floor(Math.random() * 1000000);
 }
-
