@@ -24,7 +24,7 @@ app.post("/recipe", (req, res) => {
       break;
     case "beef":
       data = JSON.parse(recipeJSON)[1];   
-
+      break;
     case "fish":
       data = JSON.parse(recipeJSON)[2];   
       break;
@@ -32,7 +32,9 @@ app.post("/recipe", (req, res) => {
     default:
       break;
   }
-  
+
+  res.redirect("/")
+   
 
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 });
