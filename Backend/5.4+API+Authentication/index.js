@@ -4,7 +4,7 @@ import { render } from "ejs";
 
 const app = express();
 const port = 3000;
-const API_URL = "https://secrets-api.appbrewery.com/";
+const API_URL = "https://secrets-api.appbrewery.com";
 
 //TODO 1: Fill in your values for the 3 types of auth.
 const yourUsername = "gabo";
@@ -20,7 +20,7 @@ app.get("/noAuth", async (req, res) => {
   //The data you get back should be sent to the ejs file as "content"
   //Hint: make sure you use JSON.stringify to turn the JS object from axios into a string.}
   try {
-    let response = await axios.get(API_URL + "random");
+    let response = await axios.get(API_URL + "/random");
     res.render("index.ejs", { content: JSON.stringify(response.data) });
   } catch (error) {
     res.status(404).send(error.message);
@@ -31,7 +31,7 @@ app.get("/basicAuth", async (req, res) => {
   //TODO 3: Write your code here to hit up the /all endpoint
 
   try {
-    let response = await axios.get(API_URL + "all?page=2", {
+    let response = await axios.get(API_URL + "/all?page=2", {
       auth: {
         username: yourUsername,
         password: yourPassword,
@@ -57,13 +57,13 @@ app.get("/basicAuth", async (req, res) => {
 app.get("/apiKey", async (req, res) => {
   //TODO 4: Write your code here to hit up the /filter endpoint
   try {
-    let response = await axios.get(API_URL + "filter" , {
+    let response = await axios.get(API_URL + "/filter?" , {
       params: {
-        emScore: 5,
+        score: 5,
         apiKey: yourAPIKey,
       },
     });
-    res.render("index.ejs", { content: response.data})
+    res.render("index.ejs", { content: JSON.stringify(response.data)});
   } catch (error) {
     res.status(404).send(error.message);
   }
@@ -77,6 +77,12 @@ const config = {
 
 app.get("/bearerToken", async (req, res) => {
   //TODO 5: Write your code here to hit up the /secrets/{id} endpoint
+  try {
+    const result = await axios.get(API_URL + "/secrets/2", config);
+    res.render("index.ejs", { content: JSON.stringify(result.data) });
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
   //and get the secret with id of 42
   //HINT: This is how you can use axios to do bearer token auth:
   // https://stackoverflow.com/a/52645402
