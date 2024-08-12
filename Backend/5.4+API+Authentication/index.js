@@ -7,11 +7,10 @@ const port = 3000;
 const API_URL = "https://secrets-api.appbrewery.com/";
 
 //TODO 1: Fill in your values for the 3 types of auth.
-const yourUsername = "test";
-const yourPassword = "test";
-const yourAPIKey = "test";
-const yourBearerToken = "test";
-
+const yourUsername = "gabo";
+const yourPassword = "gabo123";
+const yourAPIKey = "152ebd8b-b73e-4ff3-a218-008b2590cc99";
+const yourBearerToken = "c9986fff-5323-40ca-bfc9-4a38fab8f3c0";
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
 });
@@ -21,8 +20,8 @@ app.get("/noAuth", async (req, res) => {
   //The data you get back should be sent to the ejs file as "content"
   //Hint: make sure you use JSON.stringify to turn the JS object from axios into a string.}
   try {
-    const result = await axios.get(API_URL + "random");
-    res.render("index.ejs", { content: JSON.stringify(result.data) });
+    let response = await axios.get(API_URL + "random");
+    res.render("index.ejs", { content: JSON.stringify(response.data) });
   } catch (error) {
     res.status(404).send(error.message);
   }
@@ -30,15 +29,15 @@ app.get("/noAuth", async (req, res) => {
 
 app.get("/basicAuth", async (req, res) => {
   //TODO 3: Write your code here to hit up the /all endpoint
+
   try {
-    const result = await axios.get(API_URL + "/all?page=2", {
-    auth: {
+    let response = await axios.get(API_URL + "all?page=2", {
+      auth: {
         username: yourUsername,
-        password:  yourPassword,
+        password: yourPassword,
       },
     });
-    res.render("index.ejs", {content: JSON.stringify(result.data)});
-
+    res.render("index.ejs", { content: JSON.stringify(response.data) });
   } catch (error) {
     res.status(404).send(error.message);
   }
@@ -53,38 +52,27 @@ app.get("/basicAuth", async (req, res) => {
       },
     });
   */
-  try {
-    const result = await axios.get(API_URL + "all?page=2", {
-      auth: {
-        username: "my-username",
-        password: "my-password",
-      },
-    });
-    res.render("index.js", { content: JSON.stringify(result.data) });
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
 });
 
 app.get("/apiKey", async (req, res) => {
   //TODO 4: Write your code here to hit up the /filter endpoint
-  //Filter for all secrets with an embarassment score of 5 or greater
-  //HINT: You need to provide a query parameter of apiKey in the request.
   try {
-    const result = await axios.get(API_URL + "/filter", {
+    let response = await axios.get(API_URL + "filter" , {
       params: {
-        score: 5,
+        emScore: 5,
         apiKey: yourAPIKey,
       },
     });
-    res.render("index.js", { content: JSON.stringify(result.data) });
+    res.render("index.ejs", { content: response.data})
   } catch (error) {
     res.status(404).send(error.message);
   }
+  //Filter for all secrets with an embarassment score of 5 or greater
+  //HINT: You need to provide a query parameter of apiKey in the request.
 });
 
 const config = {
-  headers: { Authorization: `Bearer ${yourBearerToken}`},
+  headers: { Authorization: `Bearer ${yourBearerToken}` },
 };
 
 app.get("/bearerToken", async (req, res) => {
@@ -99,13 +87,6 @@ app.get("/bearerToken", async (req, res) => {
     },
   });
   */
-
-  try {
-    const result = await axios.get(API_URL + "/secrets/42", config);
-    res.render("index.js", {content: JSON.stringify(result.data)});
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
 });
 
 app.listen(port, () => {
